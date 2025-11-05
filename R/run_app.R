@@ -1,13 +1,44 @@
-#' Launch the Shiny App
+#' Launch the Interactive Yarra River Shiny App
 #'
-#' This function starts the Shiny app included in the package.
+#' Opens the interactive Shiny application included with the **yarraclean**
+#' package. The app provides an exploratory interface for visualising
+#' cleaned water-quality measurements from the Yarra River (Victoria, Australia)
+#' between **2020 and 2025**.
 #'
-#' @return A running Shiny app
-#' @export
+#' The app allows users to:
+#' * Select key environmental variables (e.g. pH, salinity, turbidity, nitrogen, temperature)
+#' * View year-by-year box-and-whisker plots with optional violin overlays
+#' * Read scientific context and interpretation guidance for each metric
+#' * Explore how water-quality indicators change over time
+#'
+#' This function simply locates the bundled app under `inst/shiny-app/`
+#' and launches it using [`shiny::runApp()`]. No additional setup is required.
+#'
+#' @details
+#' The Shiny app is built on top of the dataset `yarra_river_data`,
+#' which is included in the package and derived from open data published by
+#' the Victorian Water Measurement Information System (WMIS).
+#'
+#' @return
+#' Opens the Shiny application in the RStudio Viewer pane or default web browser.
+#' The function is called for its side-effect (running the app) and does not
+#' return a value.
+#'
+#' @section Data source:
+#' Cleaned dataset originally sourced from:
+#' <https://data.water.vic.gov.au/WMIS/>
+#'
 #' @examples
 #' if (interactive()) {
 #'   run_app()
 #' }
+#'
+#' @seealso
+#' * [`yarra_river_data`] — the dataset used by the app
+#' * `vignette("yarraclean")` — package overview and examples
+#' * [`shiny::runApp()`] for the underlying app launch mechanics
+#'
+#' @export
 run_app <- function() {
   app_dir <- system.file("shiny-app", package = "yarraclean")
   if (app_dir == "") {
