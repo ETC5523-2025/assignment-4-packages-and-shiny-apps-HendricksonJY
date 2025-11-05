@@ -12,7 +12,10 @@ The package includes one dataset (`yarra_river_data`) and a Shiny app launcher (
 You can install the package using:
 
 ``` r
-remotes::install_github("ETC5523-2025/assignment-4-packages-and-shiny-apps-HendricksonJY")
+remotes::install_github(
+  "ETC5523-2025/assignment-4-packages-and-shiny-apps-HendricksonJY",
+  build_vignettes = TRUE
+)
 library(yarraclean)
 ```
 
