@@ -9,8 +9,15 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: Provides a cleaned and analysis-ready version of the Yarra River
+    water quality dataset, prepared from the original monitoring data published
+    by the Victorian Department of Energy, Environment, and Climate Action. 
+    The package contains the processed dataset and a Shiny app launcher 
+    function (`run_app()`) for interactive exploration of trends in pH, 
+    turbidity, salinity, nitrogen and water temperature. The pyurpose of this 
+    package is to supply a curated environmental dataset for teaching, 
+    visualisation and reproducible research.
+
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
