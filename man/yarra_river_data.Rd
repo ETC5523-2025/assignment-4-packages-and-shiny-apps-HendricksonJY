@@ -23,10 +23,10 @@ Yarra River monitoring dataset provided for ETC5523 (Monash University).
 yarra_river_data
 }
 \description{
-A processed water-quality dataset for analysing environmental trends in the
-Yarra River. The data are suitable for visualisation, exploratory data
+A processed water-quality dataset for analyzing environmental trends in the
+Yarra River. The data is suitable for visualization, exploratory data
 analysis, statistical modelling, and interactive applications. The dataset
-is provided in a tidy wide format, where each row represents a single
+is provided in a wide format, where each row represents a single
 observation at a monitoring site and each column corresponds to a measured
 water-quality variable.
 }

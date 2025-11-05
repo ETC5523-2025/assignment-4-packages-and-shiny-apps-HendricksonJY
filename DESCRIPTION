@@ -17,7 +17,6 @@ Description: Provides a cleaned and analysis-ready version of the Yarra River
     turbidity, salinity, nitrogen and water temperature. The pyurpose of this 
     package is to supply a curated environmental dataset for teaching, 
     visualisation and reproducible research.
-
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
