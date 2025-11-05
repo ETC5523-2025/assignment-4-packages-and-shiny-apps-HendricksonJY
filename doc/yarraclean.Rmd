@@ -1,0 +1,115 @@
+---
+title: "yarraclean: Yarra River Water Quality"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{yarraclean}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7.2,
+  fig.height = 4.6
+)
+```
+
+## Installation
+
+You can install the package directly from GitHub using:
+
+```{r eval = FALSE}
+# Install and load the package
+remotes::install_github(
+  "ETC5523-2025/assignment-4-packages-and-shiny-apps-HendricksonJY",
+  build_vignettes = TRUE
+)
+library(yarraclean)
+```
+note: ensure you have the remotes package installed.
+
+## Helper packages used inside this vignette
+
+```{r}
+#| message: false
+
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(tibble)
+library(knitr)
+```
+## Overview
+
+this vignette introduces the ``yarra_river_data`` dataset included in the ``yarraclean`` package.
+
+The dataset has been cleaned, filtered, and reshaped to support: 
+
+- exploratory visualization and analysis
+- statistical & predictive modelling
+- interactive applications
+
+Each row in the dataset represents a measurement at a monitoring site and time, with variables for pH, turbidity, salinity, total nitrogen, and water termperature. 
+
+```{r}
+data("yarra_river_data", package = "yarraclean")
+dplyr::glimpse(yarra_river_data)
+```
+
+## Data Dictionary
+
+```{r}
+#| echo: false
+
+var_dict <- tribble(
+~Variable,           ~Type,      ~Units,     ~Description,
+"site_id",           "character","—",        "Monitoring site identifier.",
+"datetime",          "POSIXct",  "—",        "Timestamp of the observation (local time).",
+"ph",                "numeric",  "unitless", "Acidity/alkalinity (0–14). Healthy rivers ~6.5–8.5.",
+"salinity_ec25",     "numeric",  "µS/cm",    "Electrical conductivity at 25°C; proxy for salinity/dissolved ions.",
+"turbidity",         "numeric",  "NTU",      "Cloudiness from suspended particles; higher = murkier.",
+"nitrogen_total",    "numeric",  "mg/L",     "Total nitrogen; nutrient linked to algal growth and eutrophication.",
+"water_temperature", "numeric",  "°C",       "Water temperature; affects dissolved oxygen and species tolerance."
+)
+
+kable(
+var_dict,
+align = c("l", "l", "l", "l"),
+caption = "Dictionary of variables in `yarra_river_data`."
+)
+
+```
+
+## Example: pH by Year (Boxplot)
+
+The following example visualizes pH levels by year using a boxplot. Reference lines at 6.5 and 8.0 indicate the commonly accepted healthy range. 
+
+```{r}
+#| echo: false
+yarra_river_data |>
+dplyr::filter(!is.na(ph), ph != 0) |>
+dplyr::mutate(Year = factor(lubridate::year(datetime))) |>
+ggplot2::ggplot(ggplot2::aes(x = Year, y = ph)) +
+ggplot2::geom_boxplot() +
+ggplot2::geom_hline(yintercept = 6.5, linetype = "dashed", color = "red") +
+ggplot2::geom_hline(yintercept = 8.0, linetype = "dashed", color = "red") +
+ggplot2::geom_vline(xintercept = 4.5, color = "blue") +
+ggplot2::labs(
+title = "Distribution of pH by Year",
+x = "Year", y = "pH"
+) +
+ggplot2::theme_minimal()
+
+```
+
+## Raw data source
+
+The cleaned dataset in the package is derived from the original raw monitoring data published by the [ Victorian Department of Energy, Environment, and Climate Action](https://data.water.vic.gov.au/WMIS/) via the Water Monitoring Information System (WMIS).
+
+## License
+
+This package is released under the MIT License, which permits reuse, modification, and redistribution with attribution.
+
+The original dataset remains the property of the Victorian Government and is redistributed here only in cleaned form for educational purposes.

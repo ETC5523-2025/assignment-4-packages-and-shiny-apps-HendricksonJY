@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>yarraclean: Yarra River Water Quality</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">yarraclean: Yarra River Water Quality</h1>
+
+
+
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>You can install the package directly from GitHub using:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Install and load the package</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="st">&quot;ETC5523-2025/assignment-4-packages-and-shiny-apps-HendricksonJY&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="at">build_vignettes =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">library</span>(yarraclean)</span></code></pre></div>
+<p>note: ensure you have the remotes package installed.</p>
+</div>
+<div id="helper-packages-used-inside-this-vignette" class="section level2">
+<h2>Helper packages used inside this vignette</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>this vignette introduces the <code>yarra_river_data</code> dataset
+included in the <code>yarraclean</code> package.</p>
+<p>The dataset has been cleaned, filtered, and reshaped to support:</p>
+<ul>
+<li>exploratory visualization and analysis</li>
+<li>statistical &amp; predictive modelling</li>
+<li>interactive applications</li>
+</ul>
+<p>Each row in the dataset represents a measurement at a monitoring site
+and time, with variables for pH, turbidity, salinity, total nitrogen,
+and water termperature.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;yarra_river_data&quot;</span>, <span class="at">package =</span> <span class="st">&quot;yarraclean&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(yarra_river_data)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; Rows: 225</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; Columns: 7</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; $ site_id           &lt;dbl&gt; 229143, 229143, 229143, 229143, 229143, 229143, 2291…</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; $ datetime          &lt;dttm&gt; 1991-01-08 13:50:00, 1991-02-12 09:35:00, 1991-03-1…</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; $ nitrogen_total    &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; $ ph                &lt;dbl&gt; 7.1, 7.0, 6.2, 6.7, 7.7, 6.9, 6.1, 6.7, 0.0, 7.7, 7.…</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; $ salinity_ec25     &lt;dbl&gt; 230, 370, 390, 160, 200, 160, 250, 0, 170, 150, 200,…</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; $ turbidity         &lt;dbl&gt; 35, 36, 18, 20, 17, 79, 0, 41, 45, 17, 88, 130, 27, …</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; $ water_temperature &lt;dbl&gt; 21.0, 21.4, 22.2, 16.8, 17.5, 12.2, 11.0, 10.2, 12.0…</span></span></code></pre></div>
+</div>
+<div id="data-dictionary" class="section level2">
+<h2>Data Dictionary</h2>
+<table>
+<caption>Dictionary of variables in
+<code>yarra_river_data</code>.</caption>
+<colgroup>
+<col width="17%" />
+<col width="9%" />
+<col width="8%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Type</th>
+<th align="left">Units</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">site_id</td>
+<td align="left">character</td>
+<td align="left">—</td>
+<td align="left">Monitoring site identifier.</td>
+</tr>
+<tr class="even">
+<td align="left">datetime</td>
+<td align="left">POSIXct</td>
+<td align="left">—</td>
+<td align="left">Timestamp of the observation (local time).</td>
+</tr>
+<tr class="odd">
+<td align="left">ph</td>
+<td align="left">numeric</td>
+<td align="left">unitless</td>
+<td align="left">Acidity/alkalinity (0–14). Healthy rivers
+~6.5–8.5.</td>
+</tr>
+<tr class="even">
+<td align="left">salinity_ec25</td>
+<td align="left">numeric</td>
+<td align="left">µS/cm</td>
+<td align="left">Electrical conductivity at 25°C; proxy for
+salinity/dissolved ions.</td>
+</tr>
+<tr class="odd">
+<td align="left">turbidity</td>
+<td align="left">numeric</td>
+<td align="left">NTU</td>
+<td align="left">Cloudiness from suspended particles; higher =
+murkier.</td>
+</tr>
+<tr class="even">
+<td align="left">nitrogen_total</td>
+<td align="left">numeric</td>
+<td align="left">mg/L</td>
+<td align="left">Total nitrogen; nutrient linked to algal growth and
+eutrophication.</td>
+</tr>
+<tr class="odd">
+<td align="left">water_temperature</td>
+<td align="left">numeric</td>
+<td align="left">°C</td>
+<td align="left">Water temperature; affects dissolved oxygen and species
+tolerance.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-ph-by-year-boxplot" class="section level2">
+<h2>Example: pH by Year (Boxplot)</h2>
+<p>The following example visualizes pH levels by year using a boxplot.
+Reference lines at 6.5 and 8.0 indicate the commonly accepted healthy
+range.</p>
+<p><img role="img" src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div id="raw-data-source" class="section level2">
+<h2>Raw data source</h2>
+<p>The cleaned dataset in the package is derived from the original raw
+monitoring data published by the <a href="https://data.water.vic.gov.au/WMIS/">Victorian Department of
+Energy, Environment, and Climate Action</a> via the Water Monitoring
+Information System (WMIS).</p>
+</div>
+<div id="license" class="section level2">
+<h2>License</h2>
+<p>This package is released under the MIT License, which permits reuse,
+modification, and redistribution with attribution.</p>
+<p>The original dataset remains the property of the Victorian Government
+and is redistributed here only in cleaned form for educational
+purposes.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
